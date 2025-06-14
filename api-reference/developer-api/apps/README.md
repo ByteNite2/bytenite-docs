@@ -1,0 +1,3 @@
+# Apps
+
+<table data-view="cards"><thead><tr><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><strong>Metadata</strong></td><td>Fetch app's metadata like name and version.</td><td><a href="metadata.md">metadata.md</a></td></tr><tr><td><strong>Push</strong></td><td>Push a local app directory to ByteNite.</td><td><a href="push.md">push.md</a></td></tr><tr><td><strong>Manage</strong></td><td>Activate, deactivate, and delete apps.</td><td><a href="metadata.md">metadata.md</a></td></tr><tr><td><strong>Pull</strong></td><td>Download a ByteNite app locally.</td><td><a href="pull.md">pull.md</a></td></tr></tbody></table>
