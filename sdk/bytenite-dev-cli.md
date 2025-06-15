@@ -44,13 +44,15 @@ If you encounter any issues during installation:
     ```bash
     cat /etc/apt/sources.list.d/bytenite.list
     ```
-*   Check if the package is available
+*   Check if the package is available:
 
     ```bash
     apt search bytenite
     ```
 
 ### Mac
+
+#### Installation
 
 1. **Add the Bytenite Tap**
 
@@ -76,6 +78,20 @@ Follow the necessary steps as shown in the image below to let your OS know ByteN
 
 </details>
 
+#### Updating
+
+1. **Update Homebrew's formula list (including your tap)**
+
+```bash
+brew update
+```
+
+2. **Upgrade the bytenite package specifically**
+
+```bash
+brew upgrade bytenite
+```
+
 ### Windows
 
 Download and run the latest Windows release from [ByteNite CLI on GitHub](https://github.com/ByteNite2/bytenite-dev-cli/releases).
@@ -84,7 +100,7 @@ Download and run the latest Windows release from [ByteNite CLI on GitHub](https:
 
 ***
 
-**Verify Installation**
+## **Verify Installation**
 
 Check that the installation was successful by using:
 
