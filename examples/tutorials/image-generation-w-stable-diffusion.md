@@ -45,7 +45,7 @@ This will generate a folder named img-gen-diffusers.
 
 We’ve prepared a public container image for this tutorial. It includes all required dependencies—like torch and diffusers—bundled into a single build for **amd64**.
 
-You can check it out here: 🔗 [ByteNite Docker Hub - python-torch-diffusers](https://hub.docker.com/repository/docker/bytenite/python-torch-diffusers)
+You can check it out here: 🔗 [ByteNite Docker Hub - python-torch-diffusers](https://hub.docker.com/r/bytenite/python-torch-diffusers)
 
 {% hint style="info" %}
 **💡 Note:**\
