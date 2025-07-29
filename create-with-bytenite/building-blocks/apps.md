@@ -1,16 +1,5 @@
 ---
 icon: compass-drafting
-layout:
-  title:
-    visible: true
-  description:
-    visible: true
-  tableOfContents:
-    visible: true
-  outline:
-    visible: true
-  pagination:
-    visible: true
 ---
 
 # Apps
@@ -75,11 +64,15 @@ Here’s a sample manifest:
   "platform": "docker",
   "entrypoint": "main.py",
   "platform_config": {
-    "container": "huggingface/diffusers-pytorch-cuda:latest"
+    "container": "huggingface/diffusers-pytorch-cuda:latest",
+    "private_image": true,
+    "username": "alex_rivers6241",
+    "token":"dckr_pat_HgNOmERVLDm1YBSvAJELJeGOOAM"
   },
   "device_requirements": {
-    "min_cpu": 4,
-    "min_memory": 8
+    "min_cpu": 2,
+    "min_memory": 2,
+    "gpu": ["NVIDIA A100-SXM4-40GB", "NVIDIA GeForce RTX 4090"] 
   }
 }
 ```
@@ -97,30 +90,14 @@ Since many apps rely on specific hardware or container setups, tweaking this fil
 
 The following sections dive deeper into app versioning, platform settings, and hardware requirements—all centered around how to define them in your manifest.json.
 
+***
+
 ### App versioning
 
-Each app is identified by a **name** and a **version**, following the semantic versioning format: `major.minor`
-
-Example:
-
-{% code title="manifest.json - versioning example" %}
-```json
-{
-  ...
-  "name": "my-first-stable-diffusion-app",
-  "version": "0.4",
-  "description": "A stable diffusion app using HuggingFace's diffusers"
-  ...
-}
-```
-{% endcode %}
-
-Each app is identified by a `name` and a `version`, following the semantic versioning format "major.minor".
-
-#### Version Management
+Each app is identified by a `name` and a `version`, following the semantic versioning format "major.minor".&#x20;
 
 * **Unlimited versions**: You can store and activate unlimited versions of your app, provided that each one has a unique `(name, version)` pair.
-* **Uploading a new version**: Uploading an app with a new `(name, version)` combination will create a new, independent record. it creates a fresh, independent record. This is helpful if you need to maintain separate versions for testing, staging, or production.
+* **Uploading a new version**: Uploading an app with a new `(name, version)` combination will create a new, independent record. This is helpful if you need to maintain separate versions for testing, staging, or production.
 * **Updating versions**: Uploading an app with an existing `(name, version)` pairwill overwrite the current version with your updated code and configurations.
 
 Use the `name` and `version` fields in the manifest to manage app uploads and ensure consistency across your deployments:
@@ -164,6 +141,8 @@ A semantic version for managing updates.
 `"0.4"`
 
 </details>
+
+***
 
 ### Platform & hardware requirements
 
@@ -270,54 +249,11 @@ At ByteNite, we handle the infrastructure so you can focus on building your apps
 
 To ensure smooth performance, you’ll define your app’s **minimum hardware requirements**, like the number of CPU cores and memory size. This helps ByteNite allocate machines that meet (or exceed) these requirements, making sure your app runs reliably.
 
-For example, for Stable Diffusion jobs:
-
-* Recommended minimum: 16 vCPUs and 32 GiB of RAM
-* More demanding pipelines (e.g., high-resolution outputs or larger models) may need 32+ vCPUs and 64 GiB of RAM
-
 You set these requirements in the `deviceRequirements` field of your manifest.json.
 
-Example:
-
-{% code title="manifest.json - hardware reqs example" %}
-```json
-{
-  ...
-  "device_requirements": {
-    "min_cpu": 4,
-    "min_memory": 8
-  }
-  ...
-}
-```
-{% endcode %}
-
-<details>
-
-<summary><code>deviceRequirements</code>  <em>object</em></summary>
-
-**Description:**
-
-Specifies the minimum hardware resources for the machines running your app..
-
-**Supported Properties:**
-
-* `min_cpu`  _int_\
-  Minimum number of **vCPUs** required.
-* `min_memory`  _int_\
-  Minimum amount of **RAM (in GiB)** required.
-
-**Example:**
-
-```json
-{"min_cpu": 2, "min_memory": 2}
-```
-
-</details>
-
-
-
-
+{% openapi-schemas spec="dev-api" schemas="commonDeviceRequirements" grouped="true" %}
+[OpenAPI dev-api](https://api.bytenite.com/v1/dev/docs/swagger.json)
+{% endopenapi-schemas %}
 
 ***
 

@@ -1,17 +1,6 @@
 ---
 description: Overview of ByteNite's core components and functionalities
 icon: block-brick
-layout:
-  title:
-    visible: true
-  description:
-    visible: true
-  tableOfContents:
-    visible: true
-  outline:
-    visible: true
-  pagination:
-    visible: true
 ---
 
 # Building Blocks

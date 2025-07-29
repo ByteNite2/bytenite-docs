@@ -1,16 +1,5 @@
 ---
 icon: book
-layout:
-  title:
-    visible: true
-  description:
-    visible: true
-  tableOfContents:
-    visible: true
-  outline:
-    visible: true
-  pagination:
-    visible: true
 ---
 
 # Customer API
@@ -27,6 +16,6 @@ layout:
 ***
 
 {% openapi-operation spec="customer-api" path="/info" method="get" %}
-[Broken link](broken-reference)
+[OpenAPI customer-api](https://api.bytenite.com/v1/customer/docs/swagger.json)
 {% endopenapi-operation %}
 

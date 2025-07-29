@@ -1,4 +1,4 @@
-# Hello, World!
+# 👋 Hello, World!
 
 The goal of this tutorial is to build a simple ByteNite app that outputs the string "Hello, World!" to a file. Use this tutorial if you're new to ByteNite and want to have a quick sense of the workflow.
 

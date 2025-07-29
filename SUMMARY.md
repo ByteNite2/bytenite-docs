@@ -16,8 +16,8 @@
 
 * [Quick Actions](examples/quick-actions.md)
 * [Tutorials](examples/tutorials/README.md)
-  * [Hello, World!](examples/tutorials/hello-world.md)
-  * [Image Generation w/ Stable Diffusion](examples/tutorials/image-generation-w-stable-diffusion.md)
+  * [👋 Hello, World!](examples/tutorials/hello-world.md)
+  * [🌄 Image Generation](https://github.com/ByteNite2/img-gen-diffusers)
 
 ## CREATE WITH BYTENITE
 

@@ -1,6 +1,5 @@
 ---
 description: A general guide for submitting jobs via API
-noIndex: true
 icon: circle-play
 ---
 
