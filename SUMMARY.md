@@ -18,6 +18,8 @@
 * [Tutorials](examples/tutorials/README.md)
   * [👋 Hello, World!](examples/tutorials/hello-world.md)
   * [🌄 Image Generation](https://github.com/ByteNite2/img-gen-diffusers)
+  * [🧠 LLM Serving](https://github.com/ByteNite2/llm-serving)
+  * [🕸️ Web Scraping](https://github.com/ByteNite2/web-scraper)
 
 ## CREATE WITH BYTENITE
 
