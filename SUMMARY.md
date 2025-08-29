@@ -93,6 +93,7 @@
 
 ## Other
 
+* [Changelog](other/changelog.md)
 * [Glossary](other/glossary.md)
 * [Feature Requests](https://bytenite.canny.io/feature-requests)
 * [Status](http://status.bytenite.com/status/all)
