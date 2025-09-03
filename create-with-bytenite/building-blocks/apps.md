@@ -12,7 +12,7 @@ This guide walks through the structure of an app’s directory and explains wher
 
 ## 📁 App directory overview
 
-To create a new `app` directory in your local environment, execute the following [bytenite-dev-cli.md](../../sdk/bytenite-dev-cli.md "mention") command:
+To create a new `app` directory in your local environment, execute the following [bytenite-dev-cli.md](../bytenite-dev-cli.md "mention") command:
 
 ```bash
 bytenite app new [app_name]
@@ -158,25 +158,6 @@ These settings ensure your app runs in the right environment with the right reso
 #### Platform Configs
 
 To run your app on ByteNite, use the `platform` and `platformConfig` fields in the manifest to define the Docker container image your app should use.
-
-Example:
-
-{% code title="manifest.json - platform configs example" %}
-```json
-{
-  ...
-  "platform": "docker",
-  "entrypoint": "main.py",
-  "platform_config": {
-    "container": "huggingface/diffusers-pytorch-cuda:latest",
-    "private_image": true,
-    "username": "alex_rivers6241",
-    "token":"dckr_pat_HgNOmERVLDm1YBSvAJELJeGOOAM"
-  }
-  ...
-}
-```
-{% endcode %}
 
 The container image must be either publicly accessible or include the proper credentials if it’s private. It can be hosted on Docker Hub or any compatible container registry.
 

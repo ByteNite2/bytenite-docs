@@ -2,9 +2,9 @@
 
 The goal of this tutorial is to build a simple ByteNite app that outputs the string "Hello, World!" to a file. Use this tutorial if you're new to ByteNite and want to have a quick sense of the workflow.
 
-| Duration | Difficulty                                  | Prerequisites                                                                                                                                                                                                                                                                |
-| -------- | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| \~15 min | <mark style="color:green;">Very Easy</mark> | <ul class="contains-task-list"><li><input type="checkbox" checked><a data-mention href="../../getting-started/onboarding.md">onboarding.md</a></li><li><input type="checkbox" checked><a data-mention href="../../sdk/bytenite-dev-cli.md">bytenite-dev-cli.md</a></li></ul> |
+| Duration | Difficulty                                  | Prerequisites                                                                                                                                                                                                                                                                                 |
+| -------- | ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \~15 min | <mark style="color:green;">Very Easy</mark> | <ul class="contains-task-list"><li><input type="checkbox" checked><a data-mention href="../../getting-started/onboarding.md">onboarding.md</a></li><li><input type="checkbox" checked><a data-mention href="../../create-with-bytenite/bytenite-dev-cli.md">bytenite-dev-cli.md</a></li></ul> |
 
 
 

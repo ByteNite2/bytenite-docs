@@ -84,7 +84,7 @@ Below, you’ll find our user-facing components, grouped into:
 
 ### UIs
 
-<table data-view="cards"><thead><tr><th></th><th data-hidden data-card-cover data-type="files"></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td>Learn <strong>commands</strong> that let you <strong>build and submit apps</strong> to our system.</td><td><a href=".gitbook/assets/dev-cli-cover.webp">dev-cli-cover.webp</a></td><td><a href="sdk/bytenite-dev-cli.md">bytenite-dev-cli.md</a></td></tr><tr><td><strong>Launch jobs</strong> and <strong>manage settings</strong>, including billing and usage from a handy <strong>web platform</strong>.</td><td><a href=".gitbook/assets/computing-platform-cover.webp">computing-platform-cover.webp</a></td><td><a href="gui/bytenite-computing-platform.md">bytenite-computing-platform.md</a></td></tr></tbody></table>
+<table data-view="cards"><thead><tr><th></th><th data-hidden data-card-cover data-type="files"></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td>Learn <strong>commands</strong> that let you <strong>build and submit apps</strong> to our system.</td><td><a href=".gitbook/assets/dev-cli-cover.webp">dev-cli-cover.webp</a></td><td><a href="create-with-bytenite/bytenite-dev-cli.md">bytenite-dev-cli.md</a></td></tr><tr><td><strong>Launch jobs</strong> and <strong>manage settings</strong>, including billing and usage from a handy <strong>web platform</strong>.</td><td><a href=".gitbook/assets/computing-platform-cover.webp">computing-platform-cover.webp</a></td><td><a href="gui/bytenite-computing-platform.md">bytenite-computing-platform.md</a></td></tr></tbody></table>
 
 ### APIs
 

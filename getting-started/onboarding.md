@@ -96,8 +96,8 @@ Here are some recommended tools to get started with ByteNite's[#product-and-serv
 
 1. **Download & set up ByteNite Dev CLI:**
 
-{% content-ref url="../sdk/bytenite-dev-cli.md" %}
-[bytenite-dev-cli.md](../sdk/bytenite-dev-cli.md)
+{% content-ref url="../create-with-bytenite/bytenite-dev-cli.md" %}
+[bytenite-dev-cli.md](../create-with-bytenite/bytenite-dev-cli.md)
 {% endcontent-ref %}
 
 2. **Set up ByteNite API:**

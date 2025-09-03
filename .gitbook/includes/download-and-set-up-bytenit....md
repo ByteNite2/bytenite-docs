@@ -6,7 +6,7 @@ title: Download and Set Up ByteNit...
 {% step %}
 ## Download and Set Up ByteNite Dev CLI
 
-Follow the [bytenite-dev-cli.md](../../sdk/bytenite-dev-cli.md "mention") guide to get started with ByteNite's development tools.
+Follow the [bytenite-dev-cli.md](../../create-with-bytenite/bytenite-dev-cli.md "mention") guide to get started with ByteNite's development tools.
 {% endstep %}
 
 {% step %}
