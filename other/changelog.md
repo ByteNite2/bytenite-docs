@@ -5,6 +5,61 @@ icon: arrows-rotate-reverse
 
 # Changelog
 
+## Release Notes – October 6, 2025
+
+**✨ New Features**
+
+* Added support for secret type “other”, expanding secret management capabilities.
+* Enabled automatic injection of secrets into apps and engines, allowing access through environment variables.
+
+
+
+***
+
+## Release Notes – September 19, 2025
+
+**✨ New Features**
+
+* Introduced entity delete APIs for streamlined data management.
+* Added Server-Sent Events (SSE) for real-time task status updates in the backend.
+
+**⚡ Improvements**
+
+* Renamed secrets and dataSourceDescriptor references from S3 to AWS for consistency across services.
+
+
+
+***
+
+## Release Notes – September 12, 2025
+
+**⚡ Improvements**
+
+* Updated backend API routing from v1/customer/ → v1/computing/, preparing for the deprecation of older endpoints.
+* Populated the username field for existing user records to improve identity consistency.
+
+**🐞 Fixes**
+
+* Resolved issues related to template and engine import operations.
+
+**🗑️ Deprecations**
+
+* Marked the /customer/stats endpoint as deprecated in favor of updated computing metrics APIs.
+
+
+
+***
+
+## Release Notes – September 3, 2025
+
+**✨ New Features**
+
+Implemented a shared cache directory on GCS for worker VMs, allowing apps to access cached data via predefined environment variables.
+
+
+
+***
+
 ## Release Notes – August 29, 2025
 
 **✨ New Features**
