@@ -78,7 +78,7 @@ Please see [#supported-data-source-options](./#supported-data-source-options "me
 
 **Example:**
 
-"s3"
+"aws"
 
 </details>
 
@@ -132,7 +132,7 @@ Here's an example of a secret request body:
     "secret": {
         "id": "aws_full_s3_access_key",
         "name": "John's AWS S3 Full Bucket Access",
-        "secretType": "s3",
+        "secretType": "aws",
         "accessKey": "AKIAXXEXAMPLEEXAMPLEX",
         "expiresAt": "2025-12-29T18:02:27.140Z"    
     },
@@ -177,7 +177,7 @@ Use `bypass` to skip a data source.
 
 **Example:**
 
-"s3"
+"aws"
 
 </details>
 
@@ -215,7 +215,7 @@ Here is a full `dataSource`  object example:
 ```json
 {
     "dataSource": {  
-        "dataSourceDescriptor": "s3", 
+        "dataSourceDescriptor": "aws", 
         "params": {  
             "@type": "type.googleapis.com/bytenite.data_source.S3DataSource",  
             "name": "/vids/big_buck_bunny.mp4",

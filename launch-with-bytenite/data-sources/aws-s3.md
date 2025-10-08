@@ -54,7 +54,7 @@ In the AWS Console, search for **IAM** and go to **Users**.&#x20;
 ## S3 Secret
 
 {% hint style="info" %}
-`secretType`  : **`s3`**
+`secretType`  : **`aws`**
 {% endhint %}
 
 If your S3 bucket requires authentication for read or write access, set up a secret to store your S3 credentials securely with ByteNite (see [#setting-up-secrets](./#setting-up-secrets "mention"))
@@ -66,7 +66,7 @@ Here's an example of a request body of the [secrets.md](../../api-reference/auth
 {
     "secret": {
         "id": "my_aws_secret",
-        "secretType": "s3",
+        "secretType": "aws",
         "expiresAt": "2025-12-29T18:02:27.140Z", 
         "accessKey": "AKIAXXEXAMPLEEXAMPLEX",
         "name": "My AWS Full Bucket Access"
@@ -83,7 +83,7 @@ Here's an example of a request body of the [secrets.md](../../api-reference/auth
 ## S3 Data Source Object
 
 {% hint style="info" %}
-`dataSourceDescriptor`  : **`s3`**
+`dataSourceDescriptor`  : **`aws`**
 
 `@type`  : [**`type.googleapis.com/bytenite.data_source.S3DataSource`**](#user-content-fn-1)[^1]&#x20;
 {% endhint %}
@@ -154,7 +154,7 @@ The S3 bucket's region name.
 
 **Description:**
 
-The ID of an existing `s3` secret.
+The ID of an existing `aws` secret.
 
 **Example:**
 
@@ -170,7 +170,7 @@ Here is an example S3 data source and destination request body:
 ```json
 {
     "dataSource": {  
-        "dataSourceDescriptor": "s3", 
+        "dataSourceDescriptor": "aws", 
         "params": {  
             "@type": "type.googleapis.com/bytenite.data_source.S3DataSource",  
             "name": "/vids/big_buck_bunny.mp4",
@@ -181,7 +181,7 @@ Here is an example S3 data source and destination request body:
     },
     
     "dataDestination": {  
-        "dataSourceDescriptor": "s3", 
+        "dataSourceDescriptor": "aws", 
         "params": {  
             "@type": "type.googleapis.com/bytenite.data_source.S3DataSource",  
             "name": "/vids/encoded/",
