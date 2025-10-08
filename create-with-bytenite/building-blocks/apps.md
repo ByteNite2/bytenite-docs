@@ -355,7 +355,7 @@ app_params = json.loads(os.getenv('APP_PARAMS'))
 **Description**
 
 This variable represents the current chunk number of the task being executed.
-It starts at 0 and goes up to total number of chunks in that particular job - 1.
+It starts at 0 and goes up to the total number of chunks in that particular job - 1.
 
 You can use this variable to implement logic specific to each chunk. For example, saving output files with unique names based on the chunk index (result_0.txt, result_1.txt, etc.) or applying different processing rules depending on the chunk number.
 
@@ -388,8 +388,8 @@ are already available in this shared cache directory. You can directly reference
 **Usage (Python):**
 
 ```python
-    shared_cache_dir = os.getenv('SHARED_CACHE_DIR')
-    model_path = os.path.join(shared_cache_dir, 'Llama-4-Scout-Q4_K_M-00001-of-00002.gguf')
+  shared_cache_dir = os.getenv('SHARED_CACHE_DIR')
+  model_path = os.path.join(shared_cache_dir, 'Llama-4-Scout-Q4_K_M-00001-of-00002.gguf')
 ```
 
 </details>
@@ -399,6 +399,7 @@ are already available in this shared cache directory. You can directly reference
 <summary><code>USER_CACHE_DIR</code> <em>environment variable</em></summary>
 
 **Description**
+
 Similar to `SHARED_CACHE_DIR`, the `USER_CACHE_DIR` environment variable provides the path to a **user-specific cache directory**.
 You can **read and write** files in this directory, and any files stored here are **persisted across subsequent jobs**.
 
