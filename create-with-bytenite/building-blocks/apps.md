@@ -279,7 +279,7 @@ Alongside your entry point script, ByteNite injects your container with **enviro
 
 Configuring your app’s data flow using these variables ensures your job runs smoothly and interacts properly with ByteNite’s components.
 
-Here are the three preset ByteNite App environment variables:
+Here are some predefined environment variables available in every ByteNite App:
 
 <details>
 
@@ -344,6 +344,124 @@ For example, a parameter like "case" could control output string formatting, or 
 
 ```python
 app_params = json.loads(os.getenv('APP_PARAMS'))
+```
+
+</details>
+
+<details>
+
+<summary><code>CHUNK_NUMBER</code> <em>environment variable</em></summary>
+
+**Description**
+
+This variable represents the current chunk number of the task being executed.
+It starts at 0 and goes up to total number of chunks in that particular job - 1.
+
+You can use this variable to implement logic specific to each chunk. For example, saving output files with unique names based on the chunk index (result_0.txt, result_1.txt, etc.) or applying different processing rules depending on the chunk number.
+
+**Usage (Python):**
+
+```python
+chunk_number = os.getenv('CHUNK_NUMBER')
+```
+
+</details>
+
+<details>
+
+<summary><code>SHARED_CACHE_DIR</code> <em>environment variable</em></summary>
+
+**Description**
+
+This variable provides the path to the shared cache directory available within your application environment.
+It allows you to read large pre-stored files such as machine learning models, without needing to download or bundle them with your app.
+
+For example, large LLM model files (in the order of gigabytes), like:
+
+* `Llama-4-Scout-Q4_K_M-00001-of-00002.gguf`
+* `Llama-4-Scout-Q4_K_M-00002-of-00002.gguf`
+
+are already available in this shared cache directory. You can directly reference and read these files through this variable.
+
+> **Note:** This directory is **read-only**; you cannot modify or write files to it.
+
+**Usage (Python):**
+
+```python
+    shared_cache_dir = os.getenv('SHARED_CACHE_DIR')
+    model_path = os.path.join(shared_cache_dir, 'Llama-4-Scout-Q4_K_M-00001-of-00002.gguf')
+```
+
+</details>
+
+<details>
+
+<summary><code>USER_CACHE_DIR</code> <em>environment variable</em></summary>
+
+**Description**
+Similar to `SHARED_CACHE_DIR`, the `USER_CACHE_DIR` environment variable provides the path to a **user-specific cache directory**.
+You can **read and write** files in this directory, and any files stored here are **persisted across subsequent jobs**.
+
+Additionally, a dedicated API: **GET** `/v1/dev/cache/upload-url` is available to **pre-store files** in this directory **before executing a job**, enabling **faster access on the first run**.
+
+While its functionality is similar to the shared cache, the key difference is:
+
+* `SHARED_CACHE_DIR` → shared among multiple users (read-only)
+* `USER_CACHE_DIR` → private to your user (read/write access)
+
+**Usage (Python):**
+
+```python
+user_cache_dir = os.getenv('USER_CACHE_DIR')
+```
+
+</details>
+
+<details>
+
+<summary><code>SECRETS</code> <em>environment variable </em></summary>
+
+**Description**
+
+This environment variable provides access to the **secrets** that have been securely stored in your ByteNite account.
+You can use it to read credentials or configuration data (e.g., API keys, cloud access tokens) required by your application during execution.
+
+For a complete overview of how to create and manage secrets, refer to the [Setting up secrets](../../launch-with-bytenite/data-sources/README.md#setting-up-secrets "mention") guide.
+
+The value returned by this variable is a JSON-formatted string containing a list of secret objects.
+
+**Usage (Python):**
+
+```python
+secrets = os.getenv('SECRETS')
+```
+
+**Example structure:**
+
+```json
+[
+    {
+        "id": "TEST_SECRET",
+        "secretType": "other",
+        "expiresAt": "2026-07-08T00:00:00Z",
+        "accessKey": "AKIAXXEXAMPLEEXAMPLEX",
+        "params": {},
+        "name": "test_secret",
+        "secretKey": "secretKey"
+    }
+]
+```
+
+You can either **parse and filter** the required secret from this list,
+**or** directly access the `secretKey` through the environment variable corresponding to its `id`.
+
+ByteNite automatically injects each secret into the container as an environment variable,
+so you can retrieve it directly, just make sure to use the **exact secret ID**, as names are **case-sensitive**.
+
+**Usage (Python):**
+
+```python
+secret_key = os.getenv('TEST_SECRET')
 ```
 
 </details>
