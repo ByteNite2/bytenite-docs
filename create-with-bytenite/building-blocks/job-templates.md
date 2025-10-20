@@ -252,7 +252,9 @@ A set of configuration options for jobs created from this template.&#x20;
 A JSON object with the following structure:
 
 ```json
+"config": {
   "key": "value"
+}
 ```
 
 **Examples:**
