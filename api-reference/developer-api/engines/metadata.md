@@ -3,7 +3,7 @@
 ***
 
 {% openapi-operation spec="dev-api" path="/engines" method="get" %}
-[Broken link](broken-reference)
+[OpenAPI dev-api](https://api.bytenite.com/v1/dev/docs/swagger.json)
 {% endopenapi-operation %}
 
 
@@ -18,13 +18,9 @@
 
 ***
 
-{% openapi-operation spec="dev-api" path="/engines/{engineTag}" method="post" %}
-[Broken link](broken-reference)
+{% openapi-operation spec="dev-api" path="/engines/{engineTag}" method="get" %}
+[OpenAPI dev-api](https://api.bytenite.com/v1/dev/docs/swagger.json)
 {% endopenapi-operation %}
-
-
-
-
 
 
 
@@ -35,5 +31,5 @@
 ***
 
 {% openapi-operation spec="dev-api" path="/engines/{engineTag}/status" method="get" %}
-[Broken link](broken-reference)
+[OpenAPI dev-api](https://api.bytenite.com/v1/dev/docs/swagger.json)
 {% endopenapi-operation %}

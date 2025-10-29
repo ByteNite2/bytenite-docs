@@ -29,6 +29,7 @@
   * [Assembling Engines](create-with-bytenite/building-blocks/assembling-engines.md)
   * [Parameter Schemas](create-with-bytenite/building-blocks/parameter-schemas.md)
   * [Job Templates](create-with-bytenite/building-blocks/job-templates.md)
+* [Containers & Environments](create-with-bytenite/containers-and-environments.md)
 * [Developer CLI](create-with-bytenite/bytenite-dev-cli.md)
 
 ## Launch with ByteNite

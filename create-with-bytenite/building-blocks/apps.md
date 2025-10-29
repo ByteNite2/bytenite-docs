@@ -20,15 +20,14 @@ bytenite app new [app_name]
 
 A sample folder with pre-populated files and fields will be generated at your current path:
 
-```
-/[app_name]
+<pre><code>/[app_name]
 ├── app
 │   ├── main.*
 │   └── [scripts/libraries]
 ├── manifest.json
 ├── template.json
-└── schema.json
-```
+<a data-footnote-ref href="#user-content-fn-1">└── schema.json</a>
+</code></pre>
 
 **Directory Structure**:
 
@@ -67,7 +66,8 @@ Here’s a sample manifest:
     "container": "huggingface/diffusers-pytorch-cuda:latest",
     "private_image": true,
     "username": "alex_rivers6241",
-    "token":"dckr_pat_HgNOmERVLDm1YBSvAJELJeGOOAM"
+    "token":"dckr_pat_HgNOmERVLDm1YBSvAJELJeGOOAM",
+    "secrets":["MY_GCS_SECRET"]
   },
   "device_requirements": {
     "min_cpu": 2,
@@ -82,7 +82,7 @@ Here’s a sample manifest:
 
 The manifest defines key settings your app depends on, including:
 
-* Platform configuration (e.g., Docker container details)
+* Platform configuration (e.g., Docker container + data source details)
 * Hardware requirements (e.g., minimum CPU and memory)
 * App metadata (name, version, description)
 
@@ -98,7 +98,7 @@ Each app is identified by a `name` and a `version`, following the semantic versi
 
 * **Unlimited versions**: You can store and activate unlimited versions of your app, provided that each one has a unique `(name, version)` pair.
 * **Uploading a new version**: Uploading an app with a new `(name, version)` combination will create a new, independent record. This is helpful if you need to maintain separate versions for testing, staging, or production.
-* **Updating versions**: Uploading an app with an existing `(name, version)` pairwill overwrite the current version with your updated code and configurations.
+* **Updating versions**: Uploading an app with an existing `(name, version)` pair will overwrite the current version with your updated code and configurations.
 
 Use the `name` and `version` fields in the manifest to manage app uploads and ensure consistency across your deployments:
 
@@ -201,7 +201,11 @@ Contains platform-specific configurations.
   Your **Docker Hub username** (only needed if `private_image` is true).\
 
 * `token` _string_\
-  Your [**Docker Hub Personal Access Token (PAT)**](https://www.docker.com/blog/docker-hub-new-personal-access-tokens/) for authenticating image pull requests (only required if `private_image` is true).
+  Your [**Docker Hub Personal Access Token (PAT)**](https://www.docker.com/blog/docker-hub-new-personal-access-tokens/) for authenticating image pull requests (only required if `private_image` is true).\
+
+
+- &#x20;          `secrets`  _object_ \
+  Your chosen `secret_id` , generated when [Setting up Your Secrets](../../launch-with-bytenite/data-sources/#setting-up-secrets) to your respective data source provider (e.g., AWS, Google Cloud Storage).&#x20;
 
 **Example:**
 
@@ -210,7 +214,8 @@ Contains platform-specific configurations.
     "container": "huggingface/transformers-pytorch-cpu:latest",
     "private_image": true,
     "username": "alex_rivers6241",
-    "token":"dckr_pat_HgNOmERVLDm1YBSvAJELJeGOOAM"
+    "token":"dckr_pat_HgNOmERVLDm1YBSvAJELJeGOOAM",
+    "secrets": ["MY_S3_KEY"]
 }
 ```
 
@@ -242,11 +247,11 @@ You set these requirements in the `deviceRequirements` field of your manifest.js
 
 The entry point script powers your app’s core functionality—it reads input chunks, processes data, and returns results.
 
-What your script can do is nearly limitless. You can run model inferences, process large datasets, render video frames, generate PDFs in bulk, scrape the web. If it can run inside a container, it can run on ByteNite.
+What your script can do is nearly limitless. You can run model inferences, process large datasets, render video frames, generate PDFs in bulk, or scrape the web. If it can run inside a container, it can run on ByteNite.
 
 See: [#examples-of-core-processing-use-cases](../../getting-started/how-it-works.md#examples-of-core-processing-use-cases "mention") for common serverless job examples.
 
-If needed, extend your entry point script by adding custom scripts or libraries to the app/ folder. These can be imported into your main script to support your logic.
+If needed, extend your entry point script by adding custom scripts or libraries to the app/ folder. These can be imported into your main script to support your logic.&#x20;
 
 The key requirement is **how you handle inputs, parameters, and outputs**. These must follow ByteNite’s conventions to ensure your workflow runs smoothly across distributed infrastructure.
 
@@ -275,11 +280,11 @@ This setup ensures your runtime environment stays flexible and modular—making 
 
 ### Default environment variables
 
-Alongside your entry point script, ByteNite injects your container with **environment variables**. These variables provide paths to your app’s input and output folders, plus any job parameters.
+Alongside your entry point script, ByteNite injects your container with **environment variables**. These variables provide paths to your app’s input and output folders, cache directories for data sharing and persistence, as well as job parameters and secrets for secure configuration.
 
 Configuring your app’s data flow using these variables ensures your job runs smoothly and interacts properly with ByteNite’s components.
 
-Here are the three preset ByteNite App environment variables:
+Here are the six preset ByteNite App environment variables:
 
 <details>
 
@@ -330,6 +335,49 @@ task_results_dir = os.getenv('TASK_RESULTS_DIR')
 
 <details>
 
+<summary><code>SHARED_CACHE_DIR</code>  <em>environment variable</em></summary>
+
+**Description:**
+
+Contains the path to a **global, shared, read-only directory** that is accessible to every app, partitioner, and assembler running on ByteNit&#x65;**.** This directory is managed by ByteNite and is intended for **large, immutable resources** that needs to be accessed by your code.
+
+* Use this directory to access resources such as **pre-trained model weights, reference datasets, or common binaries**.
+* Any files placed here are available in read-only mode to all running jobs, from any user.
+
+The directory is **automatically mounted** and made available by ByteNite. You do not need to manage its contents or permissions.
+
+**Usage (Python):**
+
+```python
+shared_cache_dir = os.getenv('SHARED_CACHE_DIR')
+model_path = os.path.join(shared_cache_dir, 'Llama-4-Scout-17B-16E-Instruct-Q4_K_M-00001-of-00002.gguf')
+```
+
+</details>
+
+<details>
+
+<summary><code>USER_CACHE_DIR</code>  <em>environment variable</em></summary>
+
+**Description:**
+
+Contains the path to a **user-specific, read/write directory**. This directory is **unique to each user** and is shared across all jobs run by that user.&#x20;
+
+* Use this directory to **store temporary files, intermediate results, or artifacts** that are specific to your user.
+
+The directory is **automatically created** and isolated per user. You do not need to set up or clean up this directory manually.
+
+**Usage (Python):**
+
+```python
+user_cache_dir = os.getenv('USER_CACHE_DIR')
+file_path = os.path.join(user_cache_dir, 'intermediate_results.npy')
+```
+
+</details>
+
+<details>
+
 <summary><code>APP_PARAMS</code>  <em>environment variable</em></summary>
 
 **Description:**
@@ -348,9 +396,44 @@ app_params = json.loads(os.getenv('APP_PARAMS'))
 
 </details>
 
+<details>
+
+<summary><code>&#x3C;SECRETS></code>  <em>environment variable</em></summary>
+
+**Description**
+
+This environment variable grants your app access to all your secrets stored on ByteNite needed for execution. All referenced secrets are injected at runtime, making them available when your app starts. For details on secret fields, see [Setting Up Secrets](../../launch-with-bytenite/data-sources/#setting-up-secrets). You can access secrets programmatically in two ways:
+
+1. **Individual Secret Keys**\
+   For specific secrets with a known `secret_id`, each credential is injected as a separate environment variable. For example:
+
+* &#x20;   `{{secret_id}}_ACCESS_KEY`
+* `{{secret_id}}_SECRET_KEY`
+
+**Usage (Python):**
+
+```python
+access_key = os.environ.get('{{secret_id}}_ACCESS_KEY')
+secret_key = os.environ.get('{{secret_id}}_SECRET_KEY')
+```
+
+
+
+2. **Accessing Custom Type Secrets**
+
+For secrets with a `secretType` of `"other"`, the `secretKey` can be accessed directly using the environment variable `{{secret_id}}`.
+
+**Usage (Python):**
+
+```python
+secret_key = os.environ.get('{{secret_id}}')
+```
+
+</details>
+
 ### Example: Python entry point script
 
-Here’s an example of a Python-based entry point script (`main.py`) that uses the environment variables we just covered.
+Here’s an example[^2] of a Python-based entry point script (`main.py`) that uses the environment variables we just covered.
 
 ```python
 # === BYTENITE APP - MAIN SCRIPT ===
@@ -511,3 +594,8 @@ To get the most out of your ByteNite apps, keep the following principles in mind
 
 * Interact with external services or APIs only when necessary, and only if the required functionality cannot be handled by ByteNite’s Data Engines or built-in integrations.
 
+
+
+[^1]: The schema.json is no longer auto-generated with bytenite app new command
+
+[^2]: Not sure how to properly go about updating the example
