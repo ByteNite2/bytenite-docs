@@ -18,6 +18,7 @@ However, since your app may expect specific data types or formats, you can creat
 Example:
 
 {% code title="template.json" %}
+
 ```json
 {
   "id": "img-gen-diffusers-template",
@@ -25,8 +26,29 @@ Example:
   "app": "img-gen-diffusers@1",
   "partitioner": "replicate-fanout",
   "assembler": "zipper",
+  "dataSource": {
+    "dataSourceDescriptor": "bypass"
+  },
+  "dataDestination": {
+    "dataSourceDescriptor": "bucket"
+  },
+  "params": {
+    "partitioner": {
+      "num_replicas": 5
+    },
+    "assembler": {},
+    "app": {
+      "prompt": "A fantasy landscape, trending on artstation"
+    }
+  },
+  "config": {
+    "jobTimeout": 7200,
+    "maxTaskRetries": 3,
+    "taskTimeout": 7200
+  }
 }
 ```
+
 {% endcode %}
 
 #### **How to create a job template**
@@ -104,5 +126,145 @@ Please refer to the [#tag](../../other/glossary.md#tag "mention") definition.
 * `"zipper"`
 * `"zipper@3"`
 * `"zipper@1.0"`
+
+</details>
+
+<details>
+
+<summary><code>dataSource</code> <em>json</em></summary>
+
+**Description**
+
+A data source option defines where the input data for the job will come from.
+
+**Supported Format:**
+Please refer to the [data source descriptor](../../launch-with-bytenite/data-sources/README.md) definition.
+
+**Examples:**
+
+*Example 1: Bypass*
+
+```json
+"dataSource": {
+  "dataSourceDescriptor": "bypass"
+}
+```
+
+*Example 2: AWS*
+
+```json
+  "dataSource": {  
+      "dataSourceDescriptor": "aws", 
+      "params": {  
+          "@type": "type.googleapis.com/bytenite.data_source.S3DataSource",  
+          "name": "/vids/big_buck_bunny.mp4",
+          "bucketName": "my-app-data-bucket-12345",
+          "cloudRegion": "us-east-2",
+          "secret_id": "aws_full_s3_access_key"
+      }  
+  }
+```
+
+</details>
+
+<details>
+
+<summary><code>dataDestination</code> <em>json</em></summary>
+
+**Description**
+
+A data destination option defines where the output data for the job will be sent to.
+
+**Supported Format:**
+Please refer to the [data source descriptor](../../launch-with-bytenite/data-sources/README.md) definition.
+
+**Examples:**
+
+*Example 1: Bucket*
+
+```json
+"dataDestination": {
+  "dataSourceDescriptor": "bucket"
+}
+```
+
+*Example 2: AWS*
+
+```json
+"dataDestination": {  
+      "dataSourceDescriptor": "aws", 
+      "params": {  
+          "@type": "type.googleapis.com/bytenite.data_source.S3DataSource",  
+          "name": "/outputs/",
+          "bucketName": "my-app-output-bucket-12345",
+          "cloudRegion": "us-east-2",
+          "secret_id": "aws_full_s3_access_key"
+      }  
+  }
+```
+
+</details>
+
+<details>
+
+<summary><code>params</code>  <em>json</em></summary>
+
+**Description:**
+  
+A set of parameters for the app and engines used by the job.&#x20;  
+
+**Supported Format:**
+
+A JSON object with the following structure:
+
+```json
+  "partitioner": { ... },
+  "assembler": { ... },
+  "app": { ... }
+```
+
+**Examples:**
+
+```json
+"params": {
+    "partitioner": {
+      "num_replicas": 5
+    },
+    "assembler": {},
+    "app": {
+      "prompt": "A fantasy landscape, trending on artstation"
+    }
+  }
+```
+
+</details>
+
+<details>
+
+<summary><code>config</code>  <em>json</em></summary>
+
+**Description:**
+
+A set of configuration options for jobs created from this template.&#x20;
+
+**Supported Format:**
+
+A JSON object with the following structure:
+
+```json
+"config": {
+  "key": "value"
+}
+```
+
+**Examples:**
+
+```json
+  "config": {
+    "jobTimeout": 7200,
+    "maxTaskRetries": 3,
+    "taskTimeout": 7200
+  }
+```
 
 </details>
